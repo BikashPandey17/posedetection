@@ -5,7 +5,7 @@ let calc_head_motion = false;
 let calc_hand_motion = false;
 
 function setup() {
-  const canvas = createCanvas(640, 480);
+  const canvas = createCanvas(windowWidth, windowHeight);
   background(51);
   canvas.parent('videoContainer');
 
