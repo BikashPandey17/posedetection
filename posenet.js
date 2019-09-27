@@ -6,10 +6,18 @@ let calc_hand_motion = false;
 
 function setup() {
   const canvas = createCanvas(640, 480);
+  background(51);
   canvas.parent('videoContainer');
 
   // Video capture
-  video = createCapture(VIDEO);
+  video = createCapture({
+    audio: false,
+    video: {
+      facingMode: {
+        exact: "environment"
+      }
+    }
+  });
   video.size(width, height);
 
   // Create a new poseNet method with a single detection
