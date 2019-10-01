@@ -3,21 +3,29 @@ let poseNet;
 let poses = [];
 let calc_head_motion = false;
 let calc_hand_motion = false;
+let isPC = false;
 
 function setup() {
-  const canvas = createCanvas(windowWidth, windowHeight);
-  background(51);
-  canvas.parent('videoContainer');
-
   // Video capture
-  video = createCapture({
-    audio: false,
-    video: {
-      facingMode: {
-        exact: "environment"
+  if (isPC == true){
+    const canvas = createCanvas(600, 500);
+    background(51);
+    canvas.parent('videoContainer');
+    video = createCapture(VIDEO);
+  }
+  else{
+    const canvas = createCanvas(windowWidth, windowHeight);
+    background(51);
+    canvas.parent('videoContainer');
+    video = createCapture({
+      audio: false,
+      video: {
+        facingMode: {
+          exact: "environment"
+        }
       }
-    }
-  });
+    });
+  } 
   video.size(width, height);
 
   // Create a new poseNet method with a single detection
@@ -65,6 +73,15 @@ function draw() {
   // We can call both functions to draw all keypoints and the skeletons
   //drawKeypoints();
   //drawSkeleton();
+}
+function change_cam(){
+  if (isPC == true){
+    isPC = false;
+  }
+  else{
+    isPC = true;
+  }
+  setup();
 }
 function draw_right_hand(){
   //rightShoulder
